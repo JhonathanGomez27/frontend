@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+           <div class="crear">
+            Crear Animal:  
+            <button type="button" (click)="open(content)" class="btn btn-success">Crear Animal</button>
+           </div>
+        </div>
+        <div class="card-footer">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Peso</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Corral</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let animal of animales; index as i">
+                        <th>{{ i + 1 }}</th>
+                        <td>{{ animal.name }}</td>
+                        <td>{{ animal.age }}</td>
+                        <td>{{ animal.weight }}</td>
+                        <td>{{ animal.type }}</td>
+                        <td>{{ animal.corral }}</td>
+
+                      </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Crear Animal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" [(ngModel)]="animal.name" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Edad</label>
+            <input type="text" [(ngModel)]="animal.age" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Peso</label>
+            <input type="text" [(ngModel)]="animal.weight" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tipo</label>
+            <select [(ngModel)]="animal.type" class="form-select">
+              <option value="" selected disabled>Seleccione un Tipo</option>
+              <option *ngFor="let tipo of tipos" value="{{ tipo._id }}">{{ tipo.name }}</option>
+            </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">corral</label>
+                <select [(ngModel)]="animal.corral" class="form-select">
+                <option value="" selected disabled>Seleccione un Corral</option>
+                <option *ngFor="let corral of corrales" value="{{ corral._id }}">{{ corral.name }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="addAnimal()">Crear</button>
+    </div>
+</ng-template>

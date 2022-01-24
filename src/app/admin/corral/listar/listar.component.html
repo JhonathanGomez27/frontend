@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="card text-center">
+        <div class="card-header">
+           <div class="reporte">
+            Generar Reporte:   
+            <button type="button" (click)="generarReporte()" class="btn btn-info">Generar PDF</button>
+           </div>
+
+           <div class="crear">
+            Crear Corral:  
+            <button type="button" (click)="open(content)" class="btn btn-success">Crear Corral</button>
+           </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Lista de Animales por corral</h5>
+          <p class="card-text">Seleccione el corral: </p>
+          <select class="form-select selecU" (change)="onChange($event.target)">
+            <option value="" selected disabled>Seleccione un corral</option>
+            <option *ngFor="let corral of corrales" value="{{ corral._id }}">{{ corral.name }}</option>
+          </select>
+        </div>
+        <div class="card-footer">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Peso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let animal of animales; index as i">
+                    <th>{{ i + 1 }}</th>
+                    <td>{{ animal.name }}</td>
+                    <td>{{ animal.type }}</td>
+                    <td>{{ animal.age }}</td>
+                    <td>{{ animal.weight }}</td>
+                  </tr>
+                  <tr *ngIf="this.corraId != null">
+                      <td><button  type="button" (click)="getAverageByAge()" class="btn btn-primary">Promedio Edad</button></td>
+                      <td></td>
+                      <td></td>
+                      <td *ngIf="averageAge != null">{{ averageAge }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Crear Corral</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" [(ngModel)]="corral.name" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Capacidad</label>
+            <input type="text" [(ngModel)]="corral.capacity" class="form-control" >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Restriccion</label>
+            <select [(ngModel)]="corral.restrictions" class="form-select">
+              <option value="" selected disabled>Seleccione un corral</option>
+              <option *ngFor="let restric of restrictions" value="{{ restric._id }}">{{ restric.name }}</option>
+            </select>
+          </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="addCorral()">Crear</button>
+    </div>
+</ng-template>
+  
+  
+  
+
