@@ -20,12 +20,19 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let animal of animales; index as i">
-                        <th>{{ i + 1 }}</th>
-                        <td>{{ animal.name }}</td>
-                        <td>{{ animal.age }}</td>
-                        <td>{{ animal.weight }}</td>
-                        <td>{{ animal.type }}</td>
-                        <td>{{ animal.corral }}</td>
+                        <th *ngIf="animal.type == 'Animal Carnivoro Peligroso'" style="background-color: rgb(248, 122, 122);">{{ i + 1 }}</th>
+                        <td *ngIf="animal.type == 'Animal Carnivoro Peligroso'" style="background-color: rgb(248, 122, 122);">{{ animal.name }}</td>
+                        <td *ngIf="animal.type == 'Animal Carnivoro Peligroso'" style="background-color: rgb(248, 122, 122);">{{ animal.age }}</td>
+                        <td *ngIf="animal.type == 'Animal Carnivoro Peligroso'" style="background-color: rgb(248, 122, 122);">{{ animal.weight }}</td>
+                        <td *ngIf="animal.type == 'Animal Carnivoro Peligroso'" style="background-color: rgb(248, 122, 122);">{{ animal.type }}</td>
+                        <td *ngIf="animal.type == 'Animal Carnivoro Peligroso'" style="background-color: rgb(248, 122, 122);">{{ animal.corral }}</td>
+
+                        <th *ngIf="animal.type != 'Animal Carnivoro Peligroso'" >{{ i + 1 }}</th>
+                        <td *ngIf="animal.type != 'Animal Carnivoro Peligroso'" >{{ animal.name }}</td>
+                        <td *ngIf="animal.type != 'Animal Carnivoro Peligroso'" >{{ animal.age }}</td>
+                        <td *ngIf="animal.type != 'Animal Carnivoro Peligroso'" >{{ animal.weight }}</td>
+                        <td *ngIf="animal.type != 'Animal Carnivoro Peligroso'" >{{ animal.type }}</td>
+                        <td *ngIf="animal.type != 'Animal Carnivoro Peligroso'" >{{ animal.corral }}</td>
 
                       </tr>
                 </tbody>
